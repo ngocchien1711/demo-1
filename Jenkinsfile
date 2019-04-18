@@ -31,7 +31,7 @@ pipeline {
                 DOCKER_HUB_ACCOUNT = credentials('ngocchien-docker-hub')
             }
             steps {
-                echo 'Deploying...'
+                echo "Deploying...${DOCKER_HUB_ACCOUNT_USR}"
                 sh 'docker build -t=javatest:v2 .'
                 sh "docker login -u ${DOCKER_HUB_ACCOUNT_USR} -p ${DOCKER_HUB_ACCOUNT_PSW}"
                 sh 'docker tag javatest:v2 ngocchien/javatest:v2'
