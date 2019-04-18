@@ -2,12 +2,13 @@ pipeline {
     agent any
     environment {
         APP_NAME = "javatest"
-        BRANCH_NAME = env.GIT_BRANCH
+        BRANCH_NAME = "${env.GIT_BRANCH}"
     }
     stages {
         stage('Build') {
             steps {
                 echo 'Building...'
+                echo "${BRANCH_NAME}"
                 sh './mvnw -B -DskipTests clean package'
             }
         }
