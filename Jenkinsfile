@@ -24,16 +24,16 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
+        stage('Delivery') {
             environment {
                 DOCKER_HUB_ACCOUNT = credentials('ngocchien-docker-hub')
             }
             steps {
-                echo "Deploying..."
-                sh "docker build -t=${APP_NAME}:${BRANCH_NAME} ."
+                echo "Promoting..."
+                sh "docker build -t=${APP_NAME}:${env.BRANCH_NAME} ."
                 sh "docker login -u ${DOCKER_HUB_ACCOUNT_USR} -p ${DOCKER_HUB_ACCOUNT_PSW}"
-                sh "docker tag ${APP_NAME}:${BRANCH_NAME} ${DOCKER_HUB_ACCOUNT_USR}/${APP_NAME}:${BRANCH_NAME}"
-                sh "docker push ${DOCKER_HUB_ACCOUNT_USR}/${APP_NAME}:${BRANCH_NAME}"
+                sh "docker tag ${APP_NAME}:${env.BRANCH_NAME} ${DOCKER_HUB_ACCOUNT_USR}/${APP_NAME}:${env.BRANCH_NAME}"
+                sh "docker push ${DOCKER_HUB_ACCOUNT_USR}/${APP_NAME}:${env.BRANCH_NAME}"
             }
         }
     }
