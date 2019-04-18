@@ -2,6 +2,8 @@ pipeline {
     agent any
     environment {
         APP_NAME = "javatest"
+        scmVars = checkout scm
+        BRANCH_NAME = scmVars.GITBRANCH
     }
     stages {
         stage('Build') {
@@ -30,10 +32,10 @@ pipeline {
             }
             steps {
                 echo "Promoting..."
-                sh "docker build -t=${APP_NAME}:${env.BRANCH_NAME} ."
+                sh "docker build -t=${APP_NAME}:${BRANCH_NAME} ."
                 sh "docker login -u ${DOCKER_HUB_ACCOUNT_USR} -p ${DOCKER_HUB_ACCOUNT_PSW}"
-                sh "docker tag ${APP_NAME}:${env.BRANCH_NAME} ${DOCKER_HUB_ACCOUNT_USR}/${APP_NAME}:${env.BRANCH_NAME}"
-                sh "docker push ${DOCKER_HUB_ACCOUNT_USR}/${APP_NAME}:${env.BRANCH_NAME}"
+                sh "docker tag ${APP_NAME}:${BRANCH_NAME} ${DOCKER_HUB_ACCOUNT_USR}/${APP_NAME}:${BRANCH_NAME}"
+                sh "docker push ${DOCKER_HUB_ACCOUNT_USR}/${APP_NAME}:${BRANCH_NAME}"
             }
         }
     }
