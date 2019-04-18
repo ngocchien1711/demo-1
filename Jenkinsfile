@@ -27,6 +27,7 @@ pipeline {
         }
 
         stage('Deploy') {
+            agent any
             environment {
                 DOCKER_HUB_ACCOUNT = credentials('ngocchien-docker-hub')
             }
