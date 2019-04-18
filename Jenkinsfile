@@ -1,22 +1,17 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3-alpine'
-            args '-v /root/.m2:/root/.m2'
-        }
-    }
+    agent any
     stages {
         stage('Build') {
             steps {
                 echo 'Building...'
-                sh 'mvn -B -DskipTests clean package'
+                sh './mvnw -B -DskipTests clean package'
             }
         }
 
         stage('Test') {
             steps {
                 echo 'Testing...'
-                sh 'mvn test'
+                sh './mvnw test'
             }
 
             post {
@@ -27,7 +22,6 @@ pipeline {
         }
 
         stage('Deploy') {
-            agent any
             environment {
                 DOCKER_HUB_ACCOUNT = credentials('ngocchien-docker-hub')
             }
