@@ -2,8 +2,7 @@ pipeline {
     agent any
     environment {
         APP_NAME = "javatest"
-        scmVars = checkout scm
-        BRANCH_NAME = scmVars.GITBRANCH
+        BRANCH_NAME = env.GIT_BRANCH
     }
     stages {
         stage('Build') {
