@@ -10,7 +10,7 @@ pipeline {
                 stage('Prepare') {
                     steps {
                         echo "Populating config file"
-                        sh "ansible-playbook -i /opt/demo1-playbooks/hosts/local /opt/demo1-playbooks/populate-config.yml"
+                        sh "ansible-playbook -i /opt/demo1-playbooks/hosts/dev=prepare /opt/demo1-playbooks/populate-config.yml"
                     }
                 }
 
@@ -48,7 +48,7 @@ pipeline {
                 stage('Prepare') {
                     steps {
                         echo "Populating config file"
-                        sh "ansible-playbook -i /opt/demo1-playbooks/hosts/staging /opt/demo1-playbooks/populate-config.yml"
+                        sh "ansible-playbook -i /opt/demo1-playbooks/hosts/staging-prepare /opt/demo1-playbooks/populate-config.yml"
                     }
                 }
 
