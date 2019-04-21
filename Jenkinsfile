@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         APP_NAME = "javatest"
-        BRANCH_NAME = "v4"
+        BRANCH_NAME = "v5"
     }
     stages {
         stage('Develement Environment') {
