@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         APP_NAME = "javatest"
-        BRANCH_NAME = "v3"
+        BRANCH_NAME = "v4"
     }
     stages {
         stage('Develement Environment') {
@@ -87,7 +87,7 @@ pipeline {
                 stage('Deploy') {
                     steps {
                         echo "Development Deploy"
-                        sh "ansible-playbook -i /opt/demo1-playbooks/hosts/dev /opt/demo1-playbooks/deploy-staging.yml"
+                        sh "ansible-playbook -i /opt/demo1-playbooks/hosts/staging /opt/demo1-playbooks/deploy-staging.yml"
                     }
                 }
             }
