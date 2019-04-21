@@ -37,7 +37,7 @@ pipeline {
                 stage('Deploy') {
                     steps {
                         echo "Development Deploy"
-                        sh "ansible-playbook -i /opt/demo1-playbooks/hosts/dev deploy-dev.yml"
+                        sh "ansible-playbook -i /opt/demo1-playbooks/hosts/dev /opt/demo1-playbooks/deploy-dev.yml"
                     }
                 }
             }
@@ -48,7 +48,7 @@ pipeline {
                 stage('Prepare') {
                     steps {
                         echo "Populating config file"
-                        sh "ansible-playbook -i /opt/demo1-playbooks/hosts/staging populate-config.yml"
+                        sh "ansible-playbook -i /opt/demo1-playbooks/hosts/staging /opt/demo1-playbooks/populate-config.yml"
                     }
                 }
 
@@ -87,7 +87,7 @@ pipeline {
                 stage('Deploy') {
                     steps {
                         echo "Development Deploy"
-                        sh "ansible-playbook -i /opt/demo1-playbooks/hosts/dev deploy-staging.yml"
+                        sh "ansible-playbook -i /opt/demo1-playbooks/hosts/dev /opt/demo1-playbooks/deploy-staging.yml"
                     }
                 }
             }
